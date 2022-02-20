@@ -1,0 +1,46 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\User\Desktop\1.12 stable mappings"!
+
+//Decompiled by Procyon!
+
+package javassist.runtime;
+
+public class Cflow extends ThreadLocal
+{
+    @Override
+    protected synchronized Object initialValue() {
+        return new Depth();
+    }
+    
+    public void enter() {
+        this.get().inc();
+    }
+    
+    public void exit() {
+        this.get().dec();
+    }
+    
+    public int value() {
+        return this.get().get();
+    }
+    
+    private static class Depth
+    {
+        private int depth;
+        
+        Depth() {
+            this.depth = 0;
+        }
+        
+        int get() {
+            return this.depth;
+        }
+        
+        void inc() {
+            ++this.depth;
+        }
+        
+        void dec() {
+            --this.depth;
+        }
+    }
+}
